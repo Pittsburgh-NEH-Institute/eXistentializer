@@ -9,16 +9,16 @@ Authors:
 
 ## Overview
 
-The eXist-db App Initializer is a lightweight bash shell script that creates the housekeeping files needed to build and install an eXist-db package into an instance of the database. The initializer reads a *properties.txt* file that you customize for your project and it uses the information there to create the following files:
+The **eXist-db App Initializer** is a lightweight bash shell script that creates the housekeeping files needed to build and install an [eXist-db](https://exist-db.org) package into an instance of the database. The initializer reads a *properties.txt* file that you customize for your project and it uses the information there to create the following files required for useful eXist-db *xar* packages:
 
 * *repo.xml*
 * *build.xml*
 * *expath-pkg.xml*
 * *pre-install.xq*
 
-The initializer also creates an *.exist.json* file that supports synchronizing development inside VSCode with a running instance of eXist-db. This synchronization assumes that you are running eXist-db on your local machine on port 8080 and that the *admin* password is null. If you are not using VSCode, you can either edit *initializer.sh* to remove the code that creates *.exist.json* or just delete that file after it is created.
+The Initializer also creates an *.exist.json* file that supports synchronizing development inside VSCode with a running instance of eXist-db.
 
-The Initializer prioritizes light weight and ease of use, which means that it creates the three files that are required for building and installing an *xar* package file but it does not attempt to create all content that users might want in a project repo. For example, the Initializer does not attempt to configure eXist-db users and permissions, GitHub continuous integration (CI), or Docker. Users who require that additional functionality will find it in Duncan Paterson’s [generator-exist](https://github.com/eXist-db/generator-exist) project.
+The Initializer prioritizes light weight and ease of use, which means that it creates the three XML files that are required for building and installing an *xar* package (plus the *pre-install.xq* file that helps support indexing) but it does not attempt to create all content that users might want in a project repo. For example, the Initializer does not attempt to configure eXist-db users and permissions, GitHub continuous integration (CI), or Docker. Users who require that additional functionality will find it in Duncan Paterson’s [generator-exist](https://github.com/eXist-db/generator-exist) project.
 
 ## Getting started
 This script relies on two files to configure the basic app housekeeping files required by eXist-db. These files are called `properties.txt` and `initializer.sh`. To run the script and build the application for installation in eXist-db, users require the following software.
@@ -48,6 +48,29 @@ This script relies on two files to configure the basic app housekeeping files re
 - run ant (add links?)
 - install in eXist-db using package manager
 - start syncing in VSCode (optional)
+- How to change version or status (rerun initializer or hand-edit generated configuration files)
+
+## About the generated files
+
+### repo.xml
+
+This file is needed to build and install an eXist-db *xar* package. It should not be edited by hand except (optionally) to change the *status* (e.g., alpha, beta, stable) of a project before rebuilding. As an alternative to hand-editing you can update *properties.txt* and rerun the Initializer, which will recreate this file.
+
+### expath-pkg.xml
+
+This file is needed to build and install an eXist-db *xar* package. It should not be edited by hand except (optionally) to change the *release version* (e.g., 0.0.1) of a project before rebuilding. As an alternative to hand-editing you can update *properties.txt* and rerun the Initializer, which will recreate this file.
+
+### build.xml
+
+This file is needed to build and install an eXist-db *xar* package. It should not be edited by hand.
+
+### pre-install.xq
+
+This file copies a file with the filename extension *.xconf* from the project directory into a location where eXist-db will use it to support indexed retrieval, facets, and fields. It should not be edited by hand. It is possible to build and install a package without a *pre-install.xq*, but the Initializer nonetheless supports this file because any non-trivial eXist-db will use indexing. The Initializer does not create index files because 1) those are highly project specific, and 2) they are commonly hand-edited and we wanted to ensure that the Initializer could be rerun in an existing project without accidentally overwriting files a user might reasonably be expected to have changed.
+
+### .exist.json
+
+This file is not needed to build or install an eXist-db *xar* package, but it is needed to support real-time synchronization between files edited in VSCode and running instance of eXist-db. Users who do not use VSCode can either edit *initializer.sh* to remove the block of code that creates this file or simply delete *.exist.json* after it is created.
 
 ## Credit
 
