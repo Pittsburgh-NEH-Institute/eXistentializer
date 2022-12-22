@@ -66,7 +66,9 @@ This file is needed to build and install an eXist-db *xar* package. It should no
 
 ### pre-install.xq
 
-This file copies a file with the filename extension *.xconf* from the project directory into a location where eXist-db will use it to support indexed retrieval, facets, and fields. It should not be edited by hand. It is possible to build and install a package without a *pre-install.xq*, but the Initializer nonetheless supports this file because any non-trivial eXist-db will use indexing. The Initializer does not create index files because 1) those are highly project specific, and 2) they are commonly hand-edited and we wanted to ensure that the Initializer could be rerun in an existing project without accidentally overwriting files a user might reasonably be expected to have changed.
+This file is run automatically when an app is installed into a running instance of eXist-db. It copies a file with the filename extension *.xconf* from the project directory into a location where eXist-db will use it to support indexed retrieval, facets, and fields, and the project files are then indexed automatically as they are installed. This file should not be edited by hand. 
+
+It is possible to build and install a package without a *pre-install.xq*, but the Initializer nonetheless supports this file because any non-trivial eXist-db app will use indexing. The Initializer does not create actual index files because 1) those are highly project specific, and 2) they are commonly hand-edited and we wanted to ensure that the Initializer could be rerun inside an existing project without accidentally overwriting files a user might reasonably be expected to have changed.
 
 ### .exist.json
 
