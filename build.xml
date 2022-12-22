@@ -12,7 +12,7 @@
   </target>
   <!-- Release build -->
   <target name="deploy" depends="init" description="compile release build">
-    <zip basedir="." destfile="${build.dir}/${project.app}-${project.version}.xar" excludes="**/${build.dir}/**" />
+    <zip basedir="." destfile="${build.dir}/${project.app}-${project.version}.xar" excludes="**/${build.dir}/**, *.code-workspace, initializer.sh, properties.txt" />
   </target>
   <target name="all" depends="deploy">
     <tstamp />
