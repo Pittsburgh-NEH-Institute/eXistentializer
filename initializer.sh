@@ -15,3 +15,20 @@ cat > expath-pkg.xml << XPATH_PKG_END
 </package>
 XPATH_PKG_END
 
+
+cat > repo.xml << REPO_END
+<?xml version="1.0" encoding="UTF-8"?>
+<meta
+    xmlns="http://exist-db.org/xquery/repo">
+    <description>$description</description>
+    <author>$author</author>
+    <website>$author_URI</website>
+    <status>$release_status</status>
+    <license>$license</license>
+    <copyright>true</copyright>
+    <type>application</type>
+    <target>$name</target>
+    <prepare>pre-install.xq</prepare>
+    <finish/>
+</meta>
+REPO_END
