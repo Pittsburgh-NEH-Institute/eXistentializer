@@ -55,3 +55,31 @@ cat > build.xml << BUILD_END
   </target>
 </project>
 BUILD_END
+
+cat > .existdb.json << EXISTDBJSON_END
+
+{
+  "servers": {
+    "localhost": {
+      "server": "http://localhost:8080/exist",
+      "user": "admin",
+      "password": "",
+      "root": "/db/apps/$name"
+    }
+  },
+  "sync": {
+    "server": "localhost",
+    "active": true,
+    "ignore": [
+      ".existdb.json",
+      ".git/**",
+      ".github/**",
+      "build/**",
+      ".vscode/**",
+      "README.md",
+      "*.code-workspace",
+      ".DS_Store"
+    ]
+  }
+}
+EXISTDBJSON_END
