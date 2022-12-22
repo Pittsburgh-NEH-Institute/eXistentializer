@@ -32,3 +32,26 @@ cat > repo.xml << REPO_END
     <finish/>
 </meta>
 REPO_END
+
+cat > build.xml << BUILD_END
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="all" name="$name">
+  <description>$description</description>
+  <xmlproperty file="expath-pkg.xml" />
+  <property name="project.version" value="\${package(version)}" />
+  <property name="project.app" value="$name" />
+  <property name="build.dir" value="build" />
+  <!-- Start it -->
+  <target name="init" description="create build directory">
+    <tstamp />
+    <mkdir dir="\${build.dir}" />
+  </target>
+  <!-- Release build -->
+  <target name="deploy" depends="init" description="compile release build">
+    <zip basedir="." destfile="\${build.dir}/\${project.app}-\${project.version}.xar" excludes="**/\${build.dir}/**" />
+  </target>
+  <target name="all" depends="deploy">
+    <tstamp />
+  </target>
+</project>
+BUILD_END
