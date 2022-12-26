@@ -1,55 +1,50 @@
 # app data
 # ---
-# name
-# Short name, no spaces or special characters. 
+
+# name : Short name, no spaces or special characters 
 # This will be the collection name where the app is installed.
 name='init-test'
 
-# description
-# Description shown in package manager.
+# description : Description shown in package manager
 # This can be a longer version of the name.
 description='useful description'
 
-# project_URI
-# Serves as the base URI for the project namespace.
+# project_URI : Serves as the base URI for the project namespace
 # Use a unique URI that is associated with you.
 project_URI='http://www.obdurodon.org'
 
-# version
-# Version uses semantic versioning.
+# version : Use semantic versioning
 # Initial projects will use 0.0.1.
-# To update semantic version in app later, update version in expath-pkg.xml
+# To update semantic version in app later, either:
+#   Change the value here and rerun the initializer, or
+#   Update the version in expath-pkg.xml
 version='0.0.1'
 
-# release_status
-# Release status is appended to version number.
+# release_status : Release status is appended to version number
 # Suggested values are 'alpha', 'beta', or 'stable'
-# To update release status in app later, update status in repo.xml
+# To update release status in app later, either:
+#   Change the value here and rerun the initializer, or
+#   Update the status in repo.xml
 release_status='alpha'
 
-# exist_version
-# This is the eXist-db version used for app development.
-# To update eXist-db version in app later, 
-# update semver-min on dependency in expath-pkg.xml
+# exist_version : eXist-db version used for app development
+# To update eXist-db version in app later, either:
+#   Change the value here and rerun the initializer, or
+#   Update @semver-min on <dependency> in expath-pkg.xml
 exist_version='6.0.1'
 
-# license
-# This is the software license you choose to use.
+# license : Software license you choose to use
 # Create a corresponding LICENSE file in GitHub when you
-# initialize remotely, then git pull.
+#   initialize remotely, then git pull.
 license='GNU-GPL'
 
 
 # developer data
 # ---
 
-# author
-# app developer name in human language
+# author : app developer name in human language
 author='Gabi Keane'
 
-# author_URI
-# author's website or empty string
+# author_URI : author’s website or empty string
 author_URI='http://www.obdurodon.org/gab'
-
-
 
