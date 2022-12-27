@@ -2,3 +2,8 @@
 *.code-workspace
 *~
 build/
+build.xml
+expath-pkg.xml
+repo.xml
+.exist.json
+pre-install.xq
