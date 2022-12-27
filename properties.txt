@@ -5,7 +5,16 @@
 # Instructions: Edit the property values (inside single quotes to the 
 # right of the equal sign) to specify values appropriate for your 
 # project. Then run the Initializer.
-#
+
+# ---
+# initializer configuration settings
+# ---
+
+# create_directory_structure : If "true", creates directories for
+# modules, views, data, tests with placeholder .gitkeep files. 
+# Otherwise does nothing.
+create_directory_structure="true"
+
 # ---
 # app data
 # ---

@@ -115,3 +115,11 @@ declare function local:mkcol(\$collection, \$path) {
 local:mkcol("/db/system/config", \$target),
 xdb:store-files-from-pattern(concat("/db/system/config", \$target), \$dir, "*.xconf")
 PREINSTALL_END
+
+# Optionally create directories for app resources
+if [ $create_directory_structure == "true" ] ; then
+  [ ! -d "modules" ] && mkdir modules
+  [ ! -d "views" ] && mkdir views
+  [ ! -d "data" ] && mkdir data
+  [ ! -d "tests" ] && mkdir tests
+fi
