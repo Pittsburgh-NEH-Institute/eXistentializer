@@ -117,9 +117,10 @@ xdb:store-files-from-pattern(concat("/db/system/config", \$target), \$dir, "*.xc
 PREINSTALL_END
 
 # Optionally create directories for app resources
+# Create only if nonexistent to avoid overwriting user data
 if [ $create_directory_structure == "true" ] ; then
-  [ ! -d "modules" ] && mkdir modules
-  [ ! -d "views" ] && mkdir views
-  [ ! -d "data" ] && mkdir data
-  [ ! -d "tests" ] && mkdir tests
+  [ ! -d "modules" ] && mkdir modules && touch modules/.gitkeep
+  [ ! -d "views" ] && mkdir views && touch views/.gitkeep
+  [ ! -d "data" ] && mkdir data && touch data/.gitkeep
+  [ ! -d "tests" ] && mkdir tests && touch tests/.gitkeep
 fi
