@@ -5,5 +5,5 @@ build/
 build.xml
 expath-pkg.xml
 repo.xml
-.exist.json
+.existdb.json
 pre-install.xq
