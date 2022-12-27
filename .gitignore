@@ -8,6 +8,4 @@ repo.xml
 .existdb.json
 pre-install.xq
 data
-modules
-tests
 views
