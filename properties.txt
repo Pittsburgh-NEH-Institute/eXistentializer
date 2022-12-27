@@ -1,3 +1,12 @@
+# properties.txt
+#
+# Part of https://github.com/Pittsburgh-NEH-Institute/initializer
+#
+# Instructions: Edit the property values (inside single quotes to the 
+# right of the equal sign) to specify values appropriate for your 
+# project. Then run the Initializer.
+#
+# ---
 # app data
 # ---
 
@@ -38,7 +47,7 @@ exist_version='6.0.1'
 #   initialize remotely, then git pull.
 license='GNU-GPL'
 
-
+# ---
 # developer data
 # ---
 
