@@ -1,6 +1,6 @@
-# eXist-db app initializer shell script
+# eXistentializer: a shell script for generating skeleton eXist-db applications
 
-Location: <https://github.com/Pittsburgh-NEH-Institute/initializer>
+Location: <https://github.com/Pittsburgh-NEH-Institute/eXistentializer>
 
 Authors:
 
@@ -9,19 +9,19 @@ Authors:
 
 ## Overview
 
-The **eXist-db App Initializer** is a lightweight bash shell script that creates the housekeeping files needed to build and install an [eXist-db](https://exist-db.org) package into an instance of the database. The initializer reads a *properties.txt* file that you customize for your project and it uses the information there to create the following files required for useful eXist-db *xar* packages:
+**eXistentializer** is a lightweight bash shell script that creates the housekeeping files needed to build and install an [eXist-db](https://exist-db.org) package into an instance of the database. The initializer reads a *properties.txt* file that you customize for your project and it uses the information there to create the following files required for useful eXist-db *xar* packages:
 
 * *repo.xml*
 * *build.xml*
 * *expath-pkg.xml*
 * *pre-install.xq*
 
-The Initializer also creates an *.exist.json* file that supports synchronizing development inside VSCode with a running instance of eXist-db.
+**eXistentializer** also creates an *.exist.json* file that supports synchronizing development inside VSCode with a running instance of eXist-db. Users have the option to create directories and a sample test structure.
 
-The Initializer prioritizes light weight and ease of use, which means that it creates the three XML files that are required for building and installing an *xar* package (plus the *pre-install.xq* file that helps support indexing) but it does not attempt to create all content that users might want in a project repo. For example, the Initializer does not attempt to configure eXist-db users and permissions, GitHub continuous integration (CI), or Docker. Users who require that additional functionality will find it in Duncan Paterson’s [generator-exist](https://github.com/eXist-db/generator-exist) project.
+**eXistentializer** prioritizes light weight and ease of use, which means that it creates the three XML files that are required for building and installing an *xar* package (plus the *pre-install.xq* file that helps support indexing) but it does not attempt to create all content that users might want in a project repo. For example, **eXistentializer** does not attempt to configure eXist-db users and permissions, GitHub continuous integration (CI), or Docker. Users who require that additional functionality will find it in Duncan Paterson’s [generator-exist](https://github.com/eXist-db/generator-exist) project.
 
 ## Getting started
-This script relies on two files to configure the basic app housekeeping files required by eXist-db. These files are called `properties.txt` and `initializer.sh`. To run the script and build the application for installation in eXist-db, users require the following software.
+This script relies on two files to configure the basic app housekeeping required by eXist-db. These files are called `properties.txt` and `eXistentializer.sh`. To run the script and build the application for installation in eXist-db, users require the following software.
 
 ### Dependencies
 - bash shell
@@ -33,22 +33,16 @@ This script relies on two files to configure the basic app housekeeping files re
     - Linux users don't need my instructions here
     - [Windows Chocolatey](https://community.chocolatey.org/packages/ant) users may use `choco install ant` at Git bash shell command line
 
-### Instructions (draft, please do not attempt)
+### Instructions
 
-1. Download the `repo name` and save to the directory on your computer where you plan to create the eXist-db application.
-2. Open `properties.txt` with your favorite text editor. Edit the configuration properties according to your requirements and save.
-    2a. Specify the target directory you where you plan to develop the application.
-3. At the command line, navigate to the `initializer` directory and run `./initializer.sh`.
-4. (optional) Using Git and GitHub
+1. Clone the **eXistentializer** repository.
+1. Copy or put *eXistentializer.sh* in your PATH and set to executable (`chmod +x eXistentializer.sh`)
+1. Create an empty repository for your new app and copy or put *properties.txt* into it. Using a plain text editor, edit the configuration properties according to your requirements and save.
+1. At the command line, navigate to your new project directory and run `eXistentializer.sh`. The shell script reads *properties.txt* to create the required housekeeping files.
+1. (optional) Using Git and GitHub
     - At the command line, navigate to the target directory and run `git init` to initialize Git.
     - In GitHub, create a new *empty* repository with the same name as your target directory. Do not add a description, README, .gitignore, or license.
     - Once you have created the empty repository, follow the instructions under "...or push an existing repository from the command line."
-
-## Development patterns
-- run ant (add links?)
-- install in eXist-db using package manager
-- start syncing in VSCode (optional)
-- How to change version or status (rerun initializer or hand-edit generated configuration files)
 
 ## About the generated files
 
@@ -74,6 +68,32 @@ It is possible to build and install a package without a *pre-install.xq*, but th
 
 This file is not needed to build or install an eXist-db *xar* package, but it is needed to support real-time synchronization between files edited in VSCode and running instance of eXist-db. Users who do not use VSCode can either edit *initializer.sh* to remove the block of code that creates this file or simply delete *.exist.json* after it is created.
 
+## Optional files
+
+Optional files are generated when the user sets the value of `create_directory_structure` to "true" in the *properties.txt* configuration file. If **eXistentializer** is re-run over an existing repository, the script does not overwrite existing content. Optional file structure assumes a model-view-controller (MVC) architecture, where XQuery in a *modules* subdirectory creates the model, XQuery or XSLT in a *views* subdirectory creates the view. A *controller.xql* file is included. All optional directories and files should be edited according to the user's project requirements (Siegel and Retter, *eXist*, 197ff).
+
+### *modules* and *modules/lib.xql*
+
+The *modules* subdirectory contains a sample XQuery library (*lib.xql*) with one function. This function is used in the sample test (see below).
+
+### *views*
+
+The *views* subdirectory contains an empty *.gitkeep* file, which the user should delete when adding their own content.
+
+### *data*
+
+The *data* subdirectory contains an empty *.gitkeep* file, which the user should delete when adding their own content.
+
+### *controller.xql* (under construction)
+
+The *controller.xql* file implements an MVC architecture that uses the *modules* and *views* subdirectories. The user should revise or replace as needed.
+
+### *tests* (includes two files)
+
+The *tests* subdirectory includes *test-suite.xq* and *test-runner.xq*. The user writes tests in *test-suite.xq* and runs the tests by executing *test-runner.xq* in eXide or VSCode. The user tests functions that are declared in *lib.xql* or any other XQuery library module they specify in *test-runner.xq*. Testing is included in the [eXist-db documentation](http://exist-db.org).
+
 ## Credit
+* **eXistentializer** is part of "Advanced digital editing: modeling the text and making the edition", a 2022 Institute for Advanced Topics in the Digital Humanities awarded by the NEH Office of Digital Humanities (ODH) and co-funded by the NEH Division of Research Programs. Any views, findings, conclusions, or recommendations expressed in materials developed for this project do not necessarily represent those of the National Endowment for the Humanities.
+* Parts of **eXistentializer** make use of code from [**generator-exist**](https://github.com/eXist-db/generator-exist) under an [MIT license](LICENSE-MIT.md).
 
 
