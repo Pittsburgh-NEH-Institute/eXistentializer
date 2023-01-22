@@ -119,8 +119,57 @@ PREINSTALL_END
 # Optionally create directories for app resources
 # Create only if nonexistent to avoid overwriting user data
 if [ $create_directory_structure == "true" ] ; then
-  [ ! -d "modules" ] && mkdir modules && touch modules/.gitkeep
+  [ ! -d "modules" ] &&  mkdir modules
   [ ! -d "views" ] && mkdir views && touch views/.gitkeep
   [ ! -d "data" ] && mkdir data && touch data/.gitkeep
-  [ ! -d "tests" ] && mkdir tests && touch tests/.gitkeep
+fi
+if [[ $create_directory_structure == "true" && ! -d "tests" ]] ; then
+  mkdir tests
+  cat > tests/test-runner.xq << TESTRUNNEREND
+xquery version "3.0";
+
+(: https://github.com/joewiz/exist/wiki/xqsuite :)
+
+import module namespace test="http://exist-db.org/xquery/xqsuite" 
+at "resource:org/exist/xquery/lib/xqsuite/xqsuite.xql";
+
+test:suite(
+    inspect:module-functions(xs:anyURI("test-suite.xq"))
+)
+TESTRUNNEREND
+
+ cat > tests/test-suite.xq << TESTSUITEEND
+xquery version "3.0";
+
+(: https://github.com/joewiz/exist/wiki/xqsuite :)
+
+module namespace m="http://foo.org/xquery/math";
+
+declare namespace tests="http://http://www.obdurodon.org/app/init-test/tests";
+import module namespace f="http://www.obdurodon.org/app/init-test/model" at "../modules/lib.xql";
+declare namespace test="http://exist-db.org/xquery/xqsuite";
+
+declare
+    %test:arg("n", 1) %test:assertEquals(1)
+    %test:arg("n", 5) %test:assertEquals(120)
+    %test:arg("n", 1) %test:assertEquals(10000) (: should fail :)
+function tests:factorial(\$n as xs:int) as xs:int {
+    f:factorial(\$n)
+};
+TESTSUITEEND
+ cat > modules/lib.xql << LIBEND
+xquery version "3.0";
+
+(: Based on https://github.com/joewiz/exist/wiki/xqsuite :)
+(: Uses project-specific namespaces :)
+
+module namespace m="http://www.obdurodon.org/app/init-test/model";
+
+declare function m:factorial(\$n as xs:int) as xs:int {
+    if (\$n = 1) then
+        1
+    else
+       \$n * m:factorial(\$n - 1)
+};
+LIBEND
 fi
