@@ -70,29 +70,24 @@ This file is not needed to build or install an eXist-db *xar* package, but it is
 
 ## Optional files
 
-Optional files are generated when the user sets the value of `create_directory_structure` to "true" in the *properties.txt* configuration file. If **eXistentializer** is re-run over an existing repository, the script does not overwrite existing content. Optional file structure assumes a model-view-controller (MVC) architecture, where XQuery in a *modules* subdirectory creates the model, XQuery or XSLT in a *views* subdirectory creates the view. A *controller.xql* file is included. All optional directories and files should be edited according to the user's project requirements (Siegel and Retter, *eXist*, 197ff).
+Optional files are generated when the user sets the value of `create_directory_structure` to "true" in the *properties.txt* configuration file. If **eXistentializer** is re-run over an existing repository, the script does not overwrite existing content.
 
 ### *modules* and *modules/lib.xql*
 
 The *modules* subdirectory contains a sample XQuery library (*lib.xql*) with one function. This function is used in the sample test (see below).
 
-### *views*
-
-The *views* subdirectory contains an empty *.gitkeep* file, which the user should delete when adding their own content.
-
 ### *data*
 
 The *data* subdirectory contains an empty *.gitkeep* file, which the user should delete when adding their own content.
-
-### *controller.xql* (under construction)
-
-The *controller.xql* file implements an MVC architecture that uses the *modules* and *views* subdirectories. The user should revise or replace as needed.
 
 ### *tests* (includes two files)
 
 The *tests* subdirectory includes *test-suite.xq* and *test-runner.xq*. The user writes tests in *test-suite.xq* and runs the tests by executing *test-runner.xq* in eXide or VSCode. The user tests functions that are declared in *lib.xql* or any other XQuery library module they specify in *test-runner.xq*. Testing is included in the [eXist-db documentation](http://exist-db.org).
 
+Common modifications to support a model–view–controller (MVC) architecture include creating a *controller.xql* file (see Siegel and Retter, *eXist*, 197 ff) and a *views* subdirectory that holds XQuery or XSLT files.
+
 ## Credit
+
 * **eXistentializer** is part of "Advanced digital editing: modeling the text and making the edition", a 2022 Institute for Advanced Topics in the Digital Humanities awarded by the NEH Office of Digital Humanities (ODH) and co-funded by the NEH Division of Research Programs. Any views, findings, conclusions, or recommendations expressed in materials developed for this project do not necessarily represent those of the National Endowment for the Humanities.
 * Parts of **eXistentializer** make use of code from [**generator-exist**](https://github.com/eXist-db/generator-exist) under an [MIT license](LICENSE-MIT.md).
 
