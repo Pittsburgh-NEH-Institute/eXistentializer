@@ -120,7 +120,6 @@ PREINSTALL_END
 # Create only if nonexistent to avoid overwriting user data
 if [ $create_directory_structure == "true" ] ; then
   [ ! -d "modules" ] &&  mkdir modules
-  [ ! -d "views" ] && mkdir views && touch views/.gitkeep
   [ ! -d "data" ] && mkdir data && touch data/.gitkeep
 fi
 if [[ $create_directory_structure == "true" && ! -d "tests" ]] ; then
