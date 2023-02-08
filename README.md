@@ -9,7 +9,7 @@ Authors:
 
 ## Overview
 
-**eXistentializer** is a lightweight bash shell script that creates the housekeeping files needed to build and install an [eXist-db](https://exist-db.org) package into an instance of the database. The initializer reads a *properties.txt* file that you customize for your project and it uses the information there to create the following files required for useful eXist-db *xar* packages:
+**eXistentializer** is a lightweight bash shell script that creates the housekeeping files needed to build and install an [eXist-db](https://exist-db.org) package into an instance of the database. The eXistentializer reads a *properties.txt* file that you customize for your project and it uses the information there to create the following files required for useful eXist-db *xar* packages:
 
 * *repo.xml*
 * *build.xml*
