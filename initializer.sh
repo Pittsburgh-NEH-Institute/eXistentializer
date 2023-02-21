@@ -132,6 +132,8 @@ xquery version "3.0";
 import module namespace test="http://exist-db.org/xquery/xqsuite" 
 at "resource:org/exist/xquery/lib/xqsuite/xqsuite.xql";
 
+import module namespace tests="$project_URI/tests" at "test-suite.xq";
+
 test:suite(
     inspect:module-functions(xs:anyURI("test-suite.xq"))
 )
@@ -142,10 +144,8 @@ xquery version "3.0";
 
 (: https://github.com/joewiz/exist/wiki/xqsuite :)
 
-module namespace m="http://foo.org/xquery/math";
-
-declare namespace tests="http://http://www.obdurodon.org/app/init-test/tests";
-import module namespace f="http://www.obdurodon.org/app/init-test/model" at "../modules/lib.xql";
+module namespace tests="$project_URI/tests";
+import module namespace f="$project_URI" at "../modules/lib.xql";
 declare namespace test="http://exist-db.org/xquery/xqsuite";
 
 declare
@@ -162,13 +162,13 @@ xquery version "3.0";
 (: Based on https://github.com/joewiz/exist/wiki/xqsuite :)
 (: Uses project-specific namespaces :)
 
-module namespace m="http://www.obdurodon.org/app/init-test/model";
+module namespace f="$project_URI";
 
-declare function m:factorial(\$n as xs:int) as xs:int {
+declare function f:factorial(\$n as xs:int) as xs:int {
     if (\$n = 1) then
         1
     else
-       \$n * m:factorial(\$n - 1)
+       \$n * f:factorial(\$n - 1)
 };
 LIBEND
 fi
