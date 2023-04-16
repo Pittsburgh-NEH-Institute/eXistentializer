@@ -39,6 +39,7 @@ This script relies on two files to configure the basic app housekeeping required
 1. Copy or put *eXistentializer.sh* in your PATH and set to executable (`chmod +x eXistentializer.sh`)
 1. Create an empty repository for your new app and copy or put *properties.txt* into it. Using a plain text editor, edit the configuration properties according to your requirements and save.
 1. At the command line, navigate to your new project directory and run `eXistentializer.sh`. The shell script reads *properties.txt* to create the required housekeeping files.
+*Note: Windows Git bash users may need to run the executable file using `bash /c/Users/[my_user]/[my_filepath]/eXistentializer/eXistentializer.sh` instead of adding to PATH.*
 1. (optional) Using Git and GitHub
     - At the command line, navigate to the target directory and run `git init` to initialize Git. Add and commit your first commit.
     - In GitHub, create a new *empty* repository with the same name as your target directory. Do not add a description, README, .gitignore, or license.
